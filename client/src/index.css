@@ -1,12 +1,10 @@
 @import "tailwindcss";
-
-
 @import url('https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap');
 /* Import only the fonts you want */
-
 *{
    font-family: "Miltonian Tattoo", serif;
-}
+} 
+
 @theme {
   --color-primary: #4fbf8b;
   --color-primary-dull: #44ae7c;
