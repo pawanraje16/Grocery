@@ -51,7 +51,7 @@ export default function Navbar() {
                     <div className='relative group'>
                         <img src={assets.profile_icon} className='w-10' alt="profile" />
                         <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border borde-gray-200 py-2.5 w-30 rounded-md text-sm z-40' >
-                             <li onClick={() => navigate("my-order")} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>My orders</li>
+                             <li onClick={() => navigate("my-orders")} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>My orders</li>
                             <li onClick={logout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>Logout</li> 
                         </ul>
                     </div>
@@ -74,9 +74,9 @@ export default function Navbar() {
             {/* Mobile Menu */}
           { open &&  (<div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
                 <NavLink to="/" onClick={() => setOpen(false)}>Home</NavLink>
-                <NavLink to="/" onClick={() => setOpen(false)}>All Product</NavLink>
-                {user && <NavLink to="/" onClick={() => setOpen(false)}>My Orders</NavLink>}
-                <NavLink to="/" onClick={() => setOpen(false)}>Contact</NavLink>
+                <NavLink to="/products" onClick={() => setOpen(false)}>All Product</NavLink>
+                {user && <NavLink to="/my-orders" onClick={() => setOpen(false)}>My Orders</NavLink>}
+                <NavLink to="/contact" onClick={() => setOpen(false)}>Contact</NavLink>
                 
                 {!user ? (
                     <button onClick={() => {
