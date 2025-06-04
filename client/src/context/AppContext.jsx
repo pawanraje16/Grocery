@@ -55,7 +55,7 @@ export const AppContextProvider =({children}) => {
         if(cartData[itemId] === 0){
             delete cartData[itemId];
         }
-        toast.success("Remove from cart")
+    toast.success("Remove from cart")
     setCartItems(cartData)
     }
     

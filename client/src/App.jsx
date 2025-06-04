@@ -10,6 +10,7 @@ import AllProducts from './pages/AllProducts'
 import ProductCategory from './pages/ProductCategory'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
+import AddAddress from './pages/AddAddress'
 
 function App() {
    
@@ -28,6 +29,7 @@ function App() {
           <Route path='/products/:category' element={<ProductCategory/>} />
           <Route path='/products/:categroy/:id' element={<ProductDetails/>} />
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/add-address' element={<AddAddress/>}/>
         </Routes>
       </div>
       {!isSellerPath && <Footer/>}
