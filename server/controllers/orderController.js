@@ -37,13 +37,19 @@ export const placeOrderCOD = async (req, res) => {
 // Get Orders by User ID : /api/order/user
 export const getUserOrders = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const  userId  = req.userId;
+        console.log("Fetching orders for user:" , userId)
         const orders = await Order.find({
             userId,
             $or: [{paymentType: "COD"}, {isPaid: true}]
         }).populate("items.product address").sort({createdAt: -1});
+        if(!orders || orders.length === 0){
+            console.log("NO any order")
+        }
+        console.log("Succefully fetch the user order")
         res.json({ success: true, orders });
     } catch (error) {
+        console.log("Error in getUserOrders:" , error.message);
         res.json({ success: false, message: error.message});
     }
 }
