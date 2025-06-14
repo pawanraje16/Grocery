@@ -1,8 +1,9 @@
 import { response } from "express";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
-import stripe from 'stripe'
 import User from "../models/User.js";
+import Stripe from "stripe";
+
 
 // Place Order COD : /api/order/cod
 
@@ -40,6 +41,7 @@ export const placeOrderCOD = async (req, res) => {
 // Place Order Stripe : /api/order/stripe
 export const placeOrderStripe = async (req, res) => {
     try {
+        console.log("we are in stripe online method")
         const { userId, items, address } = req.body;
         const { origin } =req.headers; // from where req is created
 
@@ -73,7 +75,7 @@ export const placeOrderStripe = async (req, res) => {
         });
 
         // Stripe Gateway Initialize
-        const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
+        const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
         //create line items for stripe
         const line_items = productData.map((item) => {
@@ -100,9 +102,10 @@ export const placeOrderStripe = async (req, res) => {
                 userId,
             }
         })
-
+        console.log("we returning the message of the stripe session")
         return res.json({success: true, url: session.url });
     } catch (error) {
+        console.log(error.message+": we are in catch block of the online method in orderController")
         return res.json({ success: false, message: error.message});
     }
 }
@@ -112,7 +115,7 @@ export const placeOrderStripe = async (req, res) => {
 export const stripeWebhooks = async (request, response) => {
     // Stripe Gateway Initialize 
     const stripeInstance = new stripe (process.env.STRIPE_SECRET_KEY);
-
+    console.log("Created stripe Instance in stripeHooks function");
     const sig = request.headers["stripe-signature"];
     let event;
 
@@ -122,7 +125,9 @@ export const stripeWebhooks = async (request, response) => {
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
         );
+        console.log("we are try block of the stripehooks");
     } catch (error) {
+        console.log("we are in the catch block of the stripehooks function in orderController having error: "+error.message)
         response.status(400).send(`Webhook Error: ${error.message}`)        
     }
 
