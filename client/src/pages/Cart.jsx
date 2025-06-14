@@ -72,7 +72,7 @@ function Cart() {
                 if(data.success){
                     window.location.replace(data.url)
                 }else {
-                    toast.error(data.message)
+                    toast.error(data.message+"else error")
                 }
 
             }
